@@ -12,7 +12,7 @@ const signupPage = (req, res) => {
 
 const logout = (req, res) => {
   req.session.destory();
-  return res.redirect('/');
+  res.redirect('/');
 };
 
 const login = (req, res) => {
