@@ -5,6 +5,8 @@ const favicon = require('serve-favicon');
 const mongoose = require('mongoose');
 const expressHandlebars = require('express-handlebars');
 const helment = require('helmet');
+const session = require('express-session');
+
 
 const router = require('./router.js');
 
@@ -27,6 +29,14 @@ app.use(favicon(`${__dirname}/../hosted/img/favicon.png`));
 app.use(compression());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+
+app.use(session({
+  key: 'sessionid',
+  secret: 'Domo Arigato',
+  resave: false,
+  saveUninitialized: false,
+
+}));
 
 app.engine('handlebars', expressHandlebars.engine({ defaultLayout: '' }));
 app.set('view engine', 'handlebars');
