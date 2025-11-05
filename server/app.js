@@ -5,7 +5,7 @@ const compression = require('compression');
 const favicon = require('serve-favicon');
 const mongoose = require('mongoose');
 const expressHandlebars = require('express-handlebars');
-const helment = require('helmet');
+const helmet = require('helmet');
 const session = require('express-session');
 const RedisStore = require('connect-redis').RedisStore;
 const redis = require('redis');
@@ -29,10 +29,10 @@ const redisClient = redis.createClient({
 
 redisClient.on('error', err => console.log('Redis Client Error', err));
 
-redisClient.connect.then(() => {
+redisClient.connect().then(() => {
   const app = express();
 
-  app.use(helment());
+  app.use(helmet());
   app.use('/assets', express.static(path.resolve(`${__dirname}/../hosted`)));
   app.use(favicon(`${__dirname}/../hosted/img/favicon.png`));
   app.use(compression());
