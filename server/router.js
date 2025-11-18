@@ -2,10 +2,11 @@ const controllers = require('./controllers');
 const mid = require('./middleware');
 
 const router = (app) => {
+  app.get('/getDomos', mid.requireLogin, controllers.Domo.getDomos);
+
   app.get('/login', mid.requiresSecure, mid.requireLogout, controllers.Account.loginPage);
   app.post('/login', mid.requiresSecure, mid.requireLogout, controllers.Account.login);
 
-  app.get('/signup', mid.requiresSecure, mid.requireLogout, controllers.Account.signupPage);
   app.post('/signup', mid.requiresSecure, mid.requireLogout, controllers.Account.signup);
 
   app.get('/logout', mid.requireLogin, controllers.Account.logout);
